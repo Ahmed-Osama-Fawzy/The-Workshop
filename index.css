@@ -87,6 +87,7 @@ section div {
     grid-template-columns: repeat(9,1fr);
     justify-content: center;
     align-items: center;
+    gap: 10px;
 }
 
 section div:first-of-type{
