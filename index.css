@@ -245,10 +245,8 @@ button{
         grid-template-columns: repeat(1 , 1fr);
     }
 }
-
-/*
-    (min-width: 1200px
-    (min-width: 990px) and (max-width: 1199px)
-    (min-width: 740px) and (max-width: 989px) 
-    (max-width: 739px)
-*/
+@media print{
+    article{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
