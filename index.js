@@ -80,6 +80,7 @@ let Hide = document.getElementById("Hide")
 Hide.addEventListener("click",()=>{
     document.getElementsByClassName("Container")[0].style.display = "none"
     MyForm.style.display = "none"
+    window.print()
 })
 
 // Remove & Edit Item Function 
@@ -120,3 +121,7 @@ Remove.addEventListener("click",()=>{
     SelectedNumber.style.boxShadow = "15px 15px 15px red"
   }
 })
+
+window.addEventListener('contextmenu', function(event) {
+    event.preventDefault();
+}, false);

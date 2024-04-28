@@ -64,8 +64,8 @@ article{
     align-items: center;
 }
 article img{
-    height: 90%;
-    width: 50%;
+    height: 100%;
+    width: 60%;
     border-radius: 100%;
 }
 article div h1{
@@ -126,12 +126,13 @@ footer{
 }
 footer ol {
     margin: 0;
+    padding: 50px;
 }
 footer ol li{
     font-size: xx-large;
     color: var(--Color5);
     text-decoration: wavy;
-    line-height: 1.7;
+    line-height: 2;
 }
 .Container{
     padding: 10px;
