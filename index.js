@@ -122,6 +122,10 @@ Remove.addEventListener("click",()=>{
   }
 })
 
-window.addEventListener('contextmenu', function(event) {
-    event.preventDefault();
-}, false);
+// window.addEventListener('contextmenu', function(event) {
+//     event.preventDefault();
+// }, false);
+
+window.onresize = function (){
+    console.log(window.innerWidth)
+}

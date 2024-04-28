@@ -4,6 +4,7 @@
 }
 body{
     margin: 0;
+    overflow: none;
 }
 :root{
     --Color1:rgb(255, 159, 28);
@@ -13,33 +14,28 @@ body{
     --Color5:rgb(46, 196, 182);
 }
 form{
-    width: 100%;
-    padding: 2%;
     background-color: var(--Color2);
+    display: grid;
+    gap: 25px;
+    padding: 10px;
 }
-form div{
-    display: inline-block;
-    margin-left: 20px;
+form#MyForm  div label , form#MyForm  div input{
+    display: block;
 }
-form div label , input{
+label , input{
     font-size: x-large;
+    margin: 5px;
 }
 form div label{
-    font-weight: 600;
+    font-weight: 800;
     color: var(--Color3);
 }
 form div input{
-    width: 70px;
     padding: 6px;
     border: none;
     border-radius: 6px;
 }
-form div .Large{
-    width: 550px;
-}
-form div .Mid{
-    width: 200px;
-}
+
 form input[type="submit"],button{
     padding: 6px 20px;
     border-radius: 5px;
@@ -53,13 +49,13 @@ form input[type="submit"]:hover , button:hover{
     color: var(--Color4);
     cursor: pointer;
 }
+
 article{
     width: 100%;
     padding: 2%;
     background-color: var(--Color4);
     color: var(--Color3);
     display: grid;
-    grid-template-columns: repeat(2,1fr);
     justify-items: center;
     align-items: center;
 }
@@ -140,7 +136,6 @@ footer ol li{
     background-color: var(--Color2);
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(2 , 1fr);
     justify-items: center;
 }
 .Container input{
@@ -152,3 +147,108 @@ footer ol li{
 button{
     margin: 25px;
 }
+
+@media (min-width: 1500px){
+    form#MyForm{
+        grid-template-columns: repeat(5 ,1fr);
+    }
+    #Spec{
+        grid-column-start: 2;
+        grid-column-end: 4;
+    }
+    .Large{
+        width: 100%
+    }
+    article{
+        grid-template-columns: repeat(2,1fr);
+    }
+    .Container{ 
+        grid-template-columns: repeat(2 , 1fr);
+    }
+}
+@media (min-width: 890px) and (max-width: 1499px){
+    .Large{
+        width: 95%;
+    }
+    form#MyForm{
+        grid-template-areas: "CN SP SP" "HE WI NU" "PR SU SU";
+    }
+    form div:first-of-type{
+        grid-area: CN;
+    }
+    form div:nth-of-type(2){
+        grid-area: SP;
+    }
+    form div:nth-of-type(3){
+        grid-area: HE;
+    }
+    form div:nth-of-type(4){
+        grid-area: WI;
+    }
+    form div:nth-of-type(5){
+        grid-area: NU;
+    }
+    form div:nth-of-type(6){
+        grid-area: PR;
+    }
+    form#MyForm >input{
+        grid-area: SU;
+    }
+    article{
+        grid-template-columns: repeat(2,1fr);
+    }
+    Container{ 
+        grid-template-columns: repeat(2 , 1fr);
+    }
+}
+@media (min-width: 740px) and (max-width: 889px){
+    form#MyForm{
+        grid-template-areas: "CN SP" "HE WI " "NU PR " " SU SU";
+    }
+    form div:first-of-type{
+        grid-area: CN;
+    }
+    form div:nth-of-type(2){
+        grid-area: SP;
+    }
+    form div:nth-of-type(3){
+        grid-area: HE;
+    }
+    form div:nth-of-type(4){
+        grid-area: WI;
+    }
+    form div:nth-of-type(5){
+        grid-area: NU;
+    }
+    form div:nth-of-type(6){
+        grid-area: PR;
+    }
+    form#MyForm >input{
+        grid-area: SU;
+    }
+    article{
+        grid-template-columns: repeat(1,1fr);
+    }
+    Container{ 
+        grid-template-columns: repeat(1 , 1fr);
+    }
+}
+@media (max-width: 739px){
+    form#MyForm{
+        justify-items: center;
+        grid-template-columns: repeat(1,1fr);
+    }
+    article{
+        grid-template-columns: repeat(1,1fr);
+    }
+    Container{ 
+        grid-template-columns: repeat(1 , 1fr);
+    }
+}
+
+/*
+    (min-width: 1200px
+    (min-width: 990px) and (max-width: 1199px)
+    (min-width: 740px) and (max-width: 989px) 
+    (max-width: 739px)
+*/
