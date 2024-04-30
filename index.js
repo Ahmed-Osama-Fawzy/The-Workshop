@@ -9,7 +9,7 @@ document.getElementById("ExpiredDate").innerHTML = ` ${CurrentDate.getDay()+2}/$
 let Arrange = 0 
 
 // Add New Item To The File 
-function AddNewItem(A,S,H,W,N,P){
+function AddNewItem(A,S,H,W,N,P,M){
     let Main = document.getElementById("TheLast")
     let Cont = document.createElement("div")
     let NN = document.createElement("h3")
@@ -20,6 +20,7 @@ function AddNewItem(A,S,H,W,N,P){
     let Number = document.createElement("h3")
     let Price = document.createElement("h3")
     let Total = document.createElement("h3")
+    let Measure = document.createElement("h3")
 
     NN.innerHTML = A
     Spec.innerHTML = S
@@ -27,7 +28,8 @@ function AddNewItem(A,S,H,W,N,P){
     Width.innerHTML = W
     Number.innerHTML = N
     Price.innerHTML = P
-    Area.innerHTML = Math.round(parseFloat(H)*parseFloat(W))
+    Measure.innerHTML = M
+    Area.innerHTML = parseFloat((parseFloat(H)*parseFloat(W))).toFixed(2)
     Total.innerHTML = Math.round(parseFloat(H)*parseFloat(W)*parseFloat(P))
     Cont.setAttribute("class","Item")
 
@@ -36,6 +38,7 @@ function AddNewItem(A,S,H,W,N,P){
     Cont.appendChild(Height)
     Cont.appendChild(Width)
     Cont.appendChild(Area)
+    Cont.appendChild(Measure)
     Cont.appendChild(Number)
     Cont.appendChild(Price)
     Cont.appendChild(Total)
@@ -59,10 +62,12 @@ MyForm.addEventListener("submit", (e) => {
     e.preventDefault();
     let Spec = document.getElementById("TheSpec").value
     let Client = document.getElementById("Client").value
+    let ClientM = document.getElementById("ClientM").value
     let Height = document.getElementById("TheHeight").value
     let Width = document.getElementById("TheWidth").value
     let Number = document.getElementById("TheNumber").value
     let Price = document.getElementById("ThePrice").value
+    let Measurement = document.getElementById("Measurement").value
     document.getElementById("Client").value = ""
     document.getElementById("TheSpec").value = ""
     document.getElementById("TheHeight").value = ""
@@ -70,10 +75,13 @@ MyForm.addEventListener("submit", (e) => {
     document.getElementById("TheNumber").value = ""
     document.getElementById("ThePrice").value = ""
     Arrange++// Counter Increasing
-    AddNewItem(Arrange,Spec,Height,Width,Number,Price)// Adding he Item 
-    // Setting Client Name
+    AddNewItem(Arrange,Spec,Height,Width,Number,Price,Measurement)// Adding he Item 
+    // Setting Client Data
     let Cl = document.getElementById("ClientName").innerHTML
     Cl != ""?console.log("Full"):document.getElementById("ClientName").innerHTML=Client
+
+    let ClM = document.getElementById("ClientMobile").innerHTML
+    ClM != ""?console.log("Full"):document.getElementById("ClientMobile").innerHTML=ClientM
 });
 
 let Hide = document.getElementById("Hide")
@@ -122,10 +130,51 @@ Remove.addEventListener("click",()=>{
   }
 })
 
-// window.addEventListener('contextmenu', function(event) {
-//     event.preventDefault();
-// }, false);
+// Prevent the right click
+window.addEventListener('contextmenu', function(event) {
+    event.preventDefault();
+}, false);
 
-window.onresize = function (){
-    console.log(window.innerWidth)
-}
+
+// Add New Rule TO list of Rules
+document.getElementById("Add").addEventListener("click",()=>{
+  let TheRule = document.getElementById("TheRule")
+  if(TheRule.value != ""){
+    let Number = document.getElementsByName("Rules").length
+    
+    let ch = document.createElement("input")
+    ch.setAttribute("name","Rules")
+    ch.setAttribute("type","checkbox")
+    ch.setAttribute("id",`R${Number+1}`)
+    
+    let la = document.createElement("label")
+    la.setAttribute("for",`R${Number+1}`)
+    la.innerHTML = TheRule.value
+
+    let Cont = document.createElement("div")
+    Cont.appendChild(ch)
+    Cont.appendChild(la)
+
+    document.getElementById("AddnewRule").before(Cont)
+    
+  }else{
+    TheRule.style.boxShadow = "15px 15px 15px red"
+  }
+})
+
+
+// Add The Rule for the oreded list to print it 
+let AllRules = document.getElementsByName("Rules")
+AllRules.forEach((e)=>{
+  e.addEventListener("change",()=>{
+    let num = e.getAttribute("id")
+    if(e.checked){
+      let item = document.createElement("li")
+      item.setAttribute("id",`R${num}`)
+      item.innerHTML = e.nextElementSibling.innerHTML
+      document.getElementById("ListOfRules").appendChild(item)
+    }else{
+      document.getElementById(`R${num}`).remove()
+    }
+  })
+})

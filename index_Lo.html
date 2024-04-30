@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقايسة</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <form id="MyForm">
+        <div>
+            <label> اسم العميل </label>
+            <input type="text" id="Client">
+        </div>
+        <div>
+            <label> رقم هاتف العميل </label>
+            <input type="text" id="ClientM">
+        </div>
+        <div id="Spec">
+            <label> مواصفات </label>
+            <input class="Large" type="text" required id="TheSpec">
+        </div>
+        <div>
+            <label> الارتفاع </label>
+            <input type="text" required id="TheHeight">
+        </div>
+        <div>
+            <label> العرض </label>
+            <input type="text" required id="TheWidth">
+        </div>
+        <div>
+            <label> العدد </label>
+            <input type="text" required id="TheNumber">
+        </div>
+        <div>
+            <label> سعر المتر </label>
+            <input type="text" required id="ThePrice">
+        </div>
+        <div>
+            <select id="Measurement" required>
+                <option value="المتر المربع "> المتر المربع </option>
+                <option value="المتر الطولي "> المتر الطولي </option>
+                <option value="القطعة"> القطعة  </option>
+            </select>
+        </div>
+        <input type="submit" value="اضافة">
+    </form>
+    
+    <article id="TheData">
+        <img src="https://i.ibb.co/PYfgSSh/White-Logo.jpg">
+        <div>
+            <h1> شركة<span> الاسراء لاعمال الالوميتال</span> </h1>
+            <h1>  التاريخ: <span id="Date"> </span> </h1>
+
+            <h1> اسم العميل: <span id="ClientName"></span> </h1>
+            <h1> رقم العميل: <span id="ClientMobile"></span> </h1>
+            
+            <h1> رقم الهاتف:  <span> 01005184578 </span> </h1>
+            <h1> واتس اب: <span>01118954564 </span> </h1>
+        </div>
+    </article>
+    <section>
+        <div id="TheContainer">
+            <div id="TheTitle">
+                <h1> رقم </h1>
+                <h1> المواصفات </h1>
+                <h1> الارتفاع </h1>
+                <h1> العرض </h1>
+                <h1> المساحة </h1>
+                <h1> وحدة القياس </h1>
+                <h1> العدد </h1>
+                <h1> سعر المتر | الوحدة </h1>
+                <h1> الاجمالي </h1>
+            </div>
+    
+            <div id="TheLast">
+                <h1> اجمالي سعر المقايسة </h1>
+                <h1 id="TotalPrice"> 0 </h1>
+            </div>
+    </section>
+    <div class="Container">
+        <button id="Hide"> طباعة </button>
+        <div>
+            <input class="SelectedNumber" type="number">
+            <button class="Modfiy"> تعديل </button>
+            <button class="Remove"> حذف </button>
+        </div>
+    </div>
+    <footer id="Rules">
+        <ol>
+            <li class="Genral"> مواعيد لعمل 9:00 صباحا حتي 8:00 مساء كل الايام عدا الجمعة </li>
+            <li class="Genral"> هذه المقايسة صالحة لمدة يومان فقط من تاريخ الاخراج حتي يوم ' <span id="ExpiredDate"></span> ' </li>
+            <li class="Genral"> هذه المقايسة تعامل بمثابة عقد للاستلام شاملة كلا من رفع المقاسات, النقل, التركيب, الالوان, الزجاج, الاكسسوارات</li>
+            <li class="Genral"> الشركة غير مسئولة عن اي اخطاء في الحلوق للشبابيك والابواب او في زوايا الحوائط في المطابخ </li>
+            <li class="Genral"> يتم الانتهاء من العمل في خلال 15 : 60 يوم علي حسب العوامل المؤثرة من كمية, طبيعة العمل, طبيعة الالوان </li>
+            <li class="Genral"> يتم الاتفاق علي الالوان الطبيعية "احمر, اخضر, الخ" يتم اختلام سعر المتر للالوان المختلفة "خشامنيوم" , جميع الالوان الكتروستاتيك بضمان 5 : 15 سنة </li>
+            <li class="Genral"> يتم دفع 50% من اجمالي السعر يوم الاتفاق المقدر ب ' <span id="FirstOfTotal">0</span> ' </li>
+            <li class="Genral"> يتم دفع 25% من من اجمالي السعر في منتصف مدة الاستلام المقدر ب ' <span id="MidOfTotal">0</span> ' , يتم دفع 25% يوم الاستلام المقدر ب ' <span id="LastOfTotal">0</span> '  </li>
+            <li class="Genral"> في حالة تخزين الشغل لفترة يتم دفع 22.5% المقدر ب ' <span id="FLastOfTotal">0</span> 'من اجمالي سعر المقايسة يوم الانتهاء من العمل و يتبقي 2.5% المقدر ب ' <span id="LLastOfTotal">0</span> ' تدفع عند التسليم</li>
+            <li class="Genral"> في حالة الاختلاف  بعد الاتفاق يتم خصم ثمن المقايسة من العربون المدفوع </li>
+            <li class="Genral"> في حالة الاختلاف اثناء مدة التنفيذ يتم خصم مصنعية العمل و استرداد باقي المبلغ المدفوع  و ذلك خلال 10 ايام</li>
+            
+            <li class="Windows"> الزجاج المتفق عليه زجاج شفاف 6 مم للسنجل , 2 زجاجة 6مم شفاف  </li>
+            <li class="Windows"> في حالة تغيير نوع الزجاج يتم تغيير سعر المتر في السنجل , في جالة طلب جورجيا او حقن غاز للزجاج الدبل يتم تغيير سعر المتر </li>
+            <li class="Windows"> عند طلب سلك متحرك للشباك المفصلي يتم حساب المتر بمقدار 1.5 متر  </li>
+            <li class="Windows">  الشباك الاقل من متر يحسب متر و الباب الاقل من 2 متر يحسب 2 متر </li>
+            <li class="Kitchen"> سعر متر المطبخ شامل الالوميتال و الفيبر و المقابض و الارفف فقط لا غير </li>
+            <li class="Kitchen"> متاح رسم تصميم للمطبخ و التعديل عليه لمره واحدة فقط و في حالة عدم الاتفاق يتم دفع ثمن التصميم , في حالة الاتفاق لا يتم دفع ثمن التصميم </li>
+        </ol>
+    </footer>
+    <script src="index.js"></script>
+</body>
+</html>

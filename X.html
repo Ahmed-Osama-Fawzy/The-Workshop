@@ -25,6 +25,10 @@
             display: grid;
             gap: 25px;
             padding: 10px;
+            width: 100%;
+        }
+        form#MyForm  div{
+            width: 100%;
         }
         form#MyForm  div label , form#MyForm  div input{
             display: block;
@@ -78,13 +82,22 @@
             color: var(--Color1);
         }
         section{
-            width: 100%;
+            position: relative;
+            max-width: 1800px;
+            overflow-x: scroll;
+            height: auto;
+        }
+        section > div{
+            position: sticky;
+            top: 0;
+            right: 0;
+            width: 1775px;
             padding: 2%;
             background-color: var(--Color4);
             color: var(--Color3);
         }
         
-        section div {
+        section div > div {
             text-align: center;
             display: grid;
             grid-template-columns: repeat(9,1fr);
@@ -93,33 +106,33 @@
             gap: 10px;
         }
         
-        section div:first-of-type{
+        section div >  div:first-of-type{
             font-size: larger;
             background-color: var(--Color1);
         }
         
-        section div h1:nth-of-type(2) ,h3:nth-of-type(2){
+        section div >  div h1:nth-of-type(2) ,h3:nth-of-type(2){
             grid-column-start: 2;
             grid-column-end: 4;
         }
         
-        section div:not(div:first-of-type){
+        section div >  div:not(div:first-of-type){
             font-size: larger;
             background-color: var(--Color3);
             color: var(--Color1);
         }
         
-        section div:last-of-type{
+        section div >  div:last-of-type{
             font-size: larger !important;
             background-color: var(--Color1) !important;
             color: var(--Color3) !important;
         }
         
-        section div:last-of-type h1:first-of-type{
+        section div >  div:last-of-type h1:first-of-type{
             grid-column-start: 1;
             grid-column-end: 6;
         }
-        section div:last-of-type h1:last-of-type{
+        section div >  div:last-of-type h1:last-of-type{
             grid-column-start: 6;
             grid-column-end: 10;
         }
@@ -173,12 +186,12 @@
                 grid-template-columns: repeat(2 , 1fr);
             }
         }
-        @media (min-width: 890px) and (max-width: 1499px){
-            .Large{
-                width: 95%;
-            }
+        @media (min-width: 1090px) and (max-width: 1499px){
             form#MyForm{
                 grid-template-areas: "CN SP SP" "HE WI NU" "PR SU SU";
+            }
+            .Large{
+                width: 100%;
             }
             form div:first-of-type{
                 grid-area: CN;
@@ -204,11 +217,11 @@
             article{
                 grid-template-columns: repeat(2,1fr);
             }
-            Container{ 
+            .Container{ 
                 grid-template-columns: repeat(2 , 1fr);
             }
         }
-        @media (min-width: 740px) and (max-width: 889px){
+        @media (min-width: 740px) and (max-width: 1089px){
             form#MyForm{
                 grid-template-areas: "CN SP" "HE WI " "NU PR " " SU SU";
             }
@@ -298,23 +311,32 @@
             <h1>  التاريخ: <span id="Date"> </span> </h1>
         </div>
     </article>
-    <section id="TheContainer">
-        <div id="TheTitle">
-            <h1> رقم </h1>
-            <h1> المواصفات </h1>
-            <h1> الارتفاع </h1>
-            <h1> العرض </h1>
-            <h1> المساحة </h1>
-            <h1> العدد </h1>
-            <h1> سعر المتر | الوحدة </h1>
-            <h1> الاجمالي </h1>
-        </div>
-
-        <div id="TheLast">
-            <h1> اجمالي سعر المقايسة </h1>
-            <h1 id="TotalPrice"> 0 </h1>
-        </div>
+    <section>
+        <div id="TheContainer">
+            <div id="TheTitle">
+                <h1> رقم </h1>
+                <h1> المواصفات </h1>
+                <h1> الارتفاع </h1>
+                <h1> العرض </h1>
+                <h1> المساحة </h1>
+                <h1> العدد </h1>
+                <h1> سعر المتر | الوحدة </h1>
+                <h1> الاجمالي </h1>
+            </div>
+    
+            <div id="TheLast">
+                <h1> اجمالي سعر المقايسة </h1>
+                <h1 id="TotalPrice"> 0 </h1>
+            </div>
     </section>
+    <div class="Container">
+        <button id="Hide"> طباعة </button>
+        <div>
+            <input class="SelectedNumber" type="number">
+            <button class="Modfiy"> تعديل </button>
+            <button class="Remove"> حذف </button>
+        </div>
+    </div>
     <footer id="Rules">
         <ol>
             <li class="Genral"> مواعيد لعمل 9:00 صباحا حتي 8:00 مساء كل الايام عدا الجمعة </li>
@@ -337,14 +359,7 @@
             <li class="Kitchen"> متاح رسم تصميم للمطبخ و التعديل عليه لمره واحدة فقط و في حالة عدم الاتفاق يتم دفع ثمن التصميم , في حالة الاتفاق لا يتم دفع ثمن التصميم </li>
         </ol>
     </footer>
-    <div class="Container">
-        <button id="Hide"> طباعة </button>
-        <div>
-            <input class="SelectedNumber" type="number">
-            <button class="Modfiy"> تعديل </button>
-            <button class="Remove"> حذف </button>
-        </div>
-    </div>
+    
     <script>
         // Date Making 
         const CurrentDate = new Date(Date.now())
@@ -470,9 +485,9 @@
         }
         })
 
-        window.addEventListener('contextmenu', function(event) {
-            event.preventDefault();
-        }, false);
+    //    window.addEventListener('contextmenu', function(event) {
+    //        event.preventDefault();
+    //    }, false);
     </script>
 </body>
 </html>
