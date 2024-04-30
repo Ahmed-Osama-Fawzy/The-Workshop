@@ -27,7 +27,7 @@ function AddNewItem(A,S,H,W,N,P){
     Width.innerHTML = W
     Number.innerHTML = N
     Price.innerHTML = P
-    Area.innerHTML = Math.round(parseFloat(H)*parseFloat(W))
+    Area.innerHTML = parseFloat((parseFloat(H)*parseFloat(W))).toFixed(2)
     Total.innerHTML = Math.round(parseFloat(H)*parseFloat(W)*parseFloat(P))
     Cont.setAttribute("class","Item")
 
