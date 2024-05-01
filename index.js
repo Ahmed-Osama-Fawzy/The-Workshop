@@ -74,8 +74,11 @@ MyForm.addEventListener("submit", (e) => {
     document.getElementById("TheWidth").value = ""
     document.getElementById("TheNumber").value = ""
     document.getElementById("ThePrice").value = ""
+    
     Arrange++// Counter Increasing
+    
     AddNewItem(Arrange,Spec,Height,Width,Number,Price,Measurement)// Adding he Item 
+    
     // Setting Client Data
     let Cl = document.getElementById("ClientName").innerHTML
     Cl != ""?console.log("Full"):document.getElementById("ClientName").innerHTML=Client
@@ -140,23 +143,9 @@ window.addEventListener('contextmenu', function(event) {
 document.getElementById("Add").addEventListener("click",()=>{
   let TheRule = document.getElementById("TheRule")
   if(TheRule.value != ""){
-    let Number = document.getElementsByName("Rules").length
-    
-    let ch = document.createElement("input")
-    ch.setAttribute("name","Rules")
-    ch.setAttribute("type","checkbox")
-    ch.setAttribute("id",`R${Number+1}`)
-    
-    let la = document.createElement("label")
-    la.setAttribute("for",`R${Number+1}`)
-    la.innerHTML = TheRule.value
-
-    let Cont = document.createElement("div")
-    Cont.appendChild(ch)
-    Cont.appendChild(la)
-
-    document.getElementById("AddnewRule").before(Cont)
-    
+    let ch = document.createElement("li")
+    ch.innerHTML = TheRule.value
+    document.getElementById("ListOfRules").appendChild(ch)
   }else{
     TheRule.style.boxShadow = "15px 15px 15px red"
   }
@@ -164,10 +153,11 @@ document.getElementById("Add").addEventListener("click",()=>{
 
 
 // Add The Rule for the oreded list to print it 
-let AllRules = document.getElementsByName("Rules")
+var AllRules = document.getElementsByName("Rules")
 AllRules.forEach((e)=>{
   e.addEventListener("change",()=>{
     let num = e.getAttribute("id")
+    console.log(num)
     if(e.checked){
       let item = document.createElement("li")
       item.setAttribute("id",`R${num}`)

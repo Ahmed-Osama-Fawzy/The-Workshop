@@ -189,6 +189,21 @@
             margin: 25px;
         }
         
+        #MyData{
+            background-color: var(--Color5);
+            text-align: center;
+            display: grid;
+            direction: ltr;
+        }
+        
+        #MyData h3{
+            color: var(--Color3);
+            font-size: x-large;
+        }
+        
+        #MyData h3 span{
+            color: var(--Color2);
+        }
         @media (min-width: 2600px){
             form#MyForm{
                 grid-template-columns: repeat(10,1fr);
@@ -207,6 +222,9 @@
             }
             .Container{ 
                 grid-template-columns: repeat(2 , 1fr);
+            }
+            #MyData{
+                grid-template-columns: 25% 25% 25% 25%;
             }
         }
         @media (min-width: 1090px) and (max-width: 1499px){
@@ -246,6 +264,9 @@
             .Container{ 
                 grid-template-columns: repeat(2 , 1fr);
             }
+            #MyData{
+                grid-template-columns: 50% 50%;
+            }
         }
         @media (min-width: 740px) and (max-width: 1089px){
             form#MyForm{
@@ -281,8 +302,11 @@
             article{
                 grid-template-columns: repeat(1,1fr);
             }
-            Container{ 
+            .Container{ 
                 grid-template-columns: repeat(1 , 1fr);
+            }
+            #MyData{
+                grid-template-columns: 100%;
             }
         }
         @media (max-width: 739px){
@@ -296,6 +320,10 @@
             .Container{ 
                 grid-template-columns: repeat(1 , 1fr);
             }
+        
+            #MyData{
+                grid-template-columns: 100%;
+            }
         }
         @media print{
             article{
@@ -303,15 +331,6 @@
             }
         }
     </style>
-</head>
-<body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مقايسة</title>
-    <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <form id="MyForm">
@@ -472,8 +491,22 @@
             </div>
         </div>
     </footer>
+    <div id="MyData">
+        <div>
+            <h3> Created By <span>Elkhyail For SW Systems</span> </h3>
+        </div> 
+        <div>
+            <h3> Directed By <span>Eng.Ahmed Osama</span> </h3>
+        </div>
+        <div>
+            <h3> What's app: <span>01026301814</span> </h3>
+        </div>
+        <div>
+           <h3> Email: <span>ahmd.osama2611@gmail.com</span> </h3>
+        </div>
+    </div>
     <script>
-       // Date Making 
+        // Date Making 
         const CurrentDate = new Date(Date.now())
         document.getElementById("Date").innerHTML = ` ${CurrentDate.getDay()}/${CurrentDate.getMonth()}/${CurrentDate.getFullYear()} - ${CurrentDate.getHours()}:${CurrentDate.getMinutes()}`
 
@@ -549,8 +582,11 @@
             document.getElementById("TheWidth").value = ""
             document.getElementById("TheNumber").value = ""
             document.getElementById("ThePrice").value = ""
+            
             Arrange++// Counter Increasing
+            
             AddNewItem(Arrange,Spec,Height,Width,Number,Price,Measurement)// Adding he Item 
+            
             // Setting Client Data
             let Cl = document.getElementById("ClientName").innerHTML
             Cl != ""?console.log("Full"):document.getElementById("ClientName").innerHTML=Client
@@ -615,23 +651,9 @@
         document.getElementById("Add").addEventListener("click",()=>{
         let TheRule = document.getElementById("TheRule")
         if(TheRule.value != ""){
-            let Number = document.getElementsByName("Rules").length
-            
-            let ch = document.createElement("input")
-            ch.setAttribute("name","Rules")
-            ch.setAttribute("type","checkbox")
-            ch.setAttribute("id",`R${Number+1}`)
-            
-            let la = document.createElement("label")
-            la.setAttribute("for",`R${Number+1}`)
-            la.innerHTML = TheRule.value
-
-            let Cont = document.createElement("div")
-            Cont.appendChild(ch)
-            Cont.appendChild(la)
-
-            document.getElementById("AddnewRule").before(Cont)
-            
+            let ch = document.createElement("li")
+            ch.innerHTML = TheRule.value
+            document.getElementById("ListOfRules").appendChild(ch)
         }else{
             TheRule.style.boxShadow = "15px 15px 15px red"
         }
@@ -639,10 +661,11 @@
 
 
         // Add The Rule for the oreded list to print it 
-        let AllRules = document.getElementsByName("Rules")
+        var AllRules = document.getElementsByName("Rules")
         AllRules.forEach((e)=>{
         e.addEventListener("change",()=>{
             let num = e.getAttribute("id")
+            console.log(num)
             if(e.checked){
             let item = document.createElement("li")
             item.setAttribute("id",`R${num}`)
