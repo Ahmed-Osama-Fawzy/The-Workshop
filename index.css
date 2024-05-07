@@ -199,16 +199,16 @@ button{
 }
 @media (min-width: 2600px){
     form#MyForm{
-        grid-template-columns: repeat(10,1fr);
+        grid-template-columns: repeat(7,1fr);
     }
 }
-@media (min-width:1500px) and (max-width: 2599px){
+@media (min-width:1800px) and (max-width: 2599px){
     form#MyForm{
-        grid-template-columns: repeat(6 ,1fr);
+        grid-template-columns: repeat(5 ,1fr);
     }
     #Spec{
         grid-column-start: 3;
-        grid-column-end: 6;
+        grid-column-end: 5;
     }
     article{
         grid-template-columns: repeat(2,1fr);
@@ -220,9 +220,9 @@ button{
         grid-template-columns: 25% 25% 25% 25%;
     }
 }
-@media (min-width: 1090px) and (max-width: 1499px){
+@media (min-width: 1290px) and (max-width: 1799px){
     form#MyForm{
-        grid-template-areas: "CN CM ." "SP SP SP" "HE WI NU" "PR M SU";
+        grid-template-areas: "CN CM . ." "SP SP SP SP" "HE WI NU ." "PR PA M SU";
     }
     form div:first-of-type{
         grid-area: CN;
@@ -246,6 +246,9 @@ button{
         grid-area: PR ;
     }
     form div:nth-of-type(8){
+        grid-area: PA ;
+    }
+    form div:nth-of-type(9){
         grid-area: M ;
     }
     form#MyForm >input{
@@ -261,9 +264,9 @@ button{
         grid-template-columns: 50% 50%;
     }
 }
-@media (min-width: 740px) and (max-width: 1089px){
+@media (min-width: 740px) and (max-width: 1289px){
     form#MyForm{
-        grid-template-areas: "CN CM" "SP SP" "HE WI" "NU PR" "M SU";
+        grid-template-areas: "CN CM" "SP SP" "HE WI" "NU PR" "M PA " "SU SU";
     }
     form div:first-of-type{
         grid-area: CN;
@@ -287,6 +290,9 @@ button{
         grid-area: PR ;
     }
     form div:nth-of-type(8){
+        grid-area: PA ;
+    }
+    form div:nth-of-type(9){
         grid-area: M ;
     }
     form#MyForm >input{
@@ -321,5 +327,8 @@ button{
 @media print{
     article{
         grid-template-columns: repeat(2,1fr);
+    }
+    section #TheContainer >div{
+        border-bottom: 2px solid var(--Color5);
     }
 }

@@ -37,10 +37,15 @@
             <input type="text" required id="ThePrice">
         </div>
         <div>
+            <label> بندا </label>
+            <input type="text" id="ThePanda">
+        </div>
+        <div>
             <select id="Measurement" required>
                 <option value="المتر المربع "> المتر المربع </option>
                 <option value="المتر الطولي "> المتر الطولي </option>
-                <option value="القطعة"> القطعة  </option>
+                <option value="القطعة"> القطعة  </option>                
+                <option value="بندا"> بندا  </option>
             </select>
         </div>
         <input type="submit" value="اضافة">
@@ -77,6 +82,7 @@
                 <h1> اجمالي سعر المقايسة </h1>
                 <h1 id="TotalPrice"> 0 </h1>
             </div>
+        </div>
     </section>
     <div class="Container">
         <button id="Hide"> طباعة </button>
@@ -89,7 +95,7 @@
     <footer id="Rules">
         <ol id="ListOfRules">
         </ol>
-        <div>
+        <div id="List">
             <div>
                 <input type="checkbox" name="Rules" id="R1">
                 <label class="Genral" for="R1"> مواعيد لعمل 9:00 صباحا حتي 8:00 مساء كل الايام عدا الجمعة </label>

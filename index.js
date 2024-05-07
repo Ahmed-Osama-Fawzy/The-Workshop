@@ -9,7 +9,7 @@ document.getElementById("ExpiredDate").innerHTML = ` ${CurrentDate.getDay()+2}/$
 let Arrange = 0 
 
 // Add New Item To The File 
-function AddNewItem(A,S,H,W,N,P,M){
+function AddNewItem(A,S,H,W,N,P,M,PA){
     let Main = document.getElementById("TheLast")
     let Cont = document.createElement("div")
     let NN = document.createElement("h3")
@@ -21,7 +21,6 @@ function AddNewItem(A,S,H,W,N,P,M){
     let Price = document.createElement("h3")
     let Total = document.createElement("h3")
     let Measure = document.createElement("h3")
-
     NN.innerHTML = A
     Spec.innerHTML = S
     Height.innerHTML = H
@@ -29,10 +28,13 @@ function AddNewItem(A,S,H,W,N,P,M){
     Number.innerHTML = N
     Price.innerHTML = P
     Measure.innerHTML = M
-    Area.innerHTML = parseFloat((parseFloat(H)*parseFloat(W))).toFixed(2)
-    Total.innerHTML = Math.round(parseFloat(H)*parseFloat(W)*parseFloat(P))
-    Cont.setAttribute("class","Item")
+    
+    let Ar = parseFloat(PA)>0?(parseFloat((parseFloat(H)*parseFloat(W))*parseFloat(PA)).toFixed(2)):(parseFloat((parseFloat(H)*parseFloat(W))).toFixed(2))
+    
+    Area.innerHTML = parseFloat(Ar)<1.0?1.0:Ar
+    Total.innerHTML = Math.round(parseFloat(Area.innerHTML)*parseFloat(P)*parseInt(N))
 
+    Cont.setAttribute("class","Item")
     Cont.appendChild(NN)
     Cont.appendChild(Spec)
     Cont.appendChild(Height)
@@ -42,11 +44,9 @@ function AddNewItem(A,S,H,W,N,P,M){
     Cont.appendChild(Number)
     Cont.appendChild(Price)
     Cont.appendChild(Total)
-
     Main.before(Cont)
-
     let TotalPrice = document.getElementById("TotalPrice")
-    let TPrice = Math.round(parseFloat(TotalPrice.innerHTML)+(parseFloat(H)*parseFloat(W)*parseFloat(P)))
+    let TPrice = Math.round(parseFloat(TotalPrice.innerHTML)+parseFloat(Total.innerHTML))
     TotalPrice.innerHTML = TPrice
     document.getElementById("FirstOfTotal").innerHTML = parseInt(TPrice*0.5)
     document.getElementById("MidOfTotal").innerHTML = parseInt(TPrice*0.25)
@@ -68,21 +68,20 @@ MyForm.addEventListener("submit", (e) => {
     let Number = document.getElementById("TheNumber").value
     let Price = document.getElementById("ThePrice").value
     let Measurement = document.getElementById("Measurement").value
+    let Panda = document.getElementById("ThePanda").value
     document.getElementById("Client").value = ""
+    document.getElementById("ClientM").value = ""
     document.getElementById("TheSpec").value = ""
     document.getElementById("TheHeight").value = ""
     document.getElementById("TheWidth").value = ""
     document.getElementById("TheNumber").value = ""
     document.getElementById("ThePrice").value = ""
-    
+    document.getElementById("ThePanda").value = ""
     Arrange++// Counter Increasing
-    
-    AddNewItem(Arrange,Spec,Height,Width,Number,Price,Measurement)// Adding he Item 
-    
+    AddNewItem(Arrange,Spec,Height,Width,Number,Price,Measurement,Panda)// Adding he Item   
     // Setting Client Data
     let Cl = document.getElementById("ClientName").innerHTML
     Cl != ""?console.log("Full"):document.getElementById("ClientName").innerHTML=Client
-
     let ClM = document.getElementById("ClientMobile").innerHTML
     ClM != ""?console.log("Full"):document.getElementById("ClientMobile").innerHTML=ClientM
 });
@@ -91,6 +90,7 @@ let Hide = document.getElementById("Hide")
 Hide.addEventListener("click",()=>{
     document.getElementsByClassName("Container")[0].style.display = "none"
     MyForm.style.display = "none"
+    document.getElementById("List").style.display = "none"
     window.print()
 })
 
@@ -98,8 +98,6 @@ Hide.addEventListener("click",()=>{
 let SelectedNumber = document.getElementsByClassName("SelectedNumber")[0]
 let Modfiy = document.getElementsByClassName("Modfiy")[0]
 let Remove = document.getElementsByClassName("Remove")[0]
-
-
 Modfiy.addEventListener("click",()=>{
   if(SelectedNumber.value > 0){
     var Items = document.getElementsByClassName("Item")
@@ -150,7 +148,6 @@ document.getElementById("Add").addEventListener("click",()=>{
     TheRule.style.boxShadow = "15px 15px 15px red"
   }
 })
-
 
 // Add The Rule for the oreded list to print it 
 var AllRules = document.getElementsByName("Rules")
