@@ -1,6 +1,19 @@
+function isFloat(value) {
+  var floatValue = parseFloat(value);
+  return !isNaN(floatValue) && value.trim() !== '' && value.includes('.');
+}
+
+function isInteger(value) {
+  var intValue = parseInt(value, 10);
+  return !isNaN(intValue) && isFinite(value) && value.trim() !== '' && intValue.toString() === parseFloat(value).toString();
+}
+function isText(value) {
+  return /^[A-Za-z\s]+$/.test(value);
+}
+
 // Date Making 
 const CurrentDate = new Date(Date.now())
-document.getElementById("Date").innerHTML = ` ${CurrentDate.getDay()}/${CurrentDate.getMonth()}/${CurrentDate.getFullYear()} - ${CurrentDate.getHours()}:${CurrentDate.getMinutes()}`
+document.getElementById("Date").innerHTML = `${CurrentDate.getDay()}/${CurrentDate.getMonth()}/${CurrentDate.getFullYear()} - ${CurrentDate.getHours()}:${CurrentDate.getMinutes()}`
 
 // Expired Date Making
 document.getElementById("ExpiredDate").innerHTML = ` ${CurrentDate.getDay()+2}/${CurrentDate.getMonth()}/${CurrentDate.getFullYear()}`
@@ -69,21 +82,26 @@ MyForm.addEventListener("submit", (e) => {
     let Price = document.getElementById("ThePrice").value
     let Measurement = document.getElementById("Measurement").value
     let Panda = document.getElementById("ThePanda").value
-    document.getElementById("Client").value = ""
-    document.getElementById("ClientM").value = ""
-    document.getElementById("TheSpec").value = ""
-    document.getElementById("TheHeight").value = ""
-    document.getElementById("TheWidth").value = ""
-    document.getElementById("TheNumber").value = ""
-    document.getElementById("ThePrice").value = ""
-    document.getElementById("ThePanda").value = ""
-    Arrange++// Counter Increasing
-    AddNewItem(Arrange,Spec,Height,Width,Number,Price,Measurement,Panda)// Adding he Item   
-    // Setting Client Data
-    let Cl = document.getElementById("ClientName").innerHTML
-    Cl != ""?console.log("Full"):document.getElementById("ClientName").innerHTML=Client
-    let ClM = document.getElementById("ClientMobile").innerHTML
-    ClM != ""?console.log("Full"):document.getElementById("ClientMobile").innerHTML=ClientM
+    if(isText(Spec) && isText(Client) && isFloat(Height) && isFloat(Width) && isInteger(Number) && isInteger(Price) && (isFloat(Panda) || !Panda)){
+      document.getElementById("Client").value = ""
+      document.getElementById("ClientM").value = ""
+      document.getElementById("TheSpec").value = ""
+      document.getElementById("TheHeight").value = ""
+      document.getElementById("TheWidth").value = ""
+      document.getElementById("TheNumber").value = ""
+      document.getElementById("ThePrice").value = ""
+      document.getElementById("ThePanda").value = ""
+      Arrange++// Counter Increasing
+      AddNewItem(Arrange,Spec,Height,Width,Number,Price,Measurement,Panda)// Adding he Item   
+      // Setting Client Data
+      let Cl = document.getElementById("ClientName").innerHTML
+      Cl != ""?console.log("Full"):document.getElementById("ClientName").innerHTML=Client
+      let ClM = document.getElementById("ClientMobile").innerHTML
+      ClM != ""?console.log("Full"):document.getElementById("ClientMobile").innerHTML=ClientM
+    }
+    else{
+      alert("عفوت لا يمكن اضافة العنصر يجب ادخال جميع القيم صحيحة")
+    }
 });
 
 let Hide = document.getElementById("Hide")
@@ -104,14 +122,14 @@ Modfiy.addEventListener("click",()=>{
     for(i = SelectedNumber.value-1 ; i < Items.length; i++){
       Items.item(i).firstChild.innerHTML = parseInt(Items.item(i).firstChild.innerHTML)-1
     }
-    document.getElementById("TotalPrice").innerHTML = parseInt(document.getElementById("TotalPrice").innerHTML)-parseInt(Items.item(SelectedNumber.value-1).lastChild.innerHTML)
+    document.getElementById("TotalPrice").innerHTML = parseInt(document.getElementById("TotalPrice").innerHTML)-parseInt(Items.item((SelectedNumber.value)-1).lastChild.innerHTML)
     document.getElementById("TheSpec").value = Items.item(SelectedNumber.value-1).childNodes[1].innerHTML
     document.getElementById("TheHeight").value = Items.item(SelectedNumber.value-1).childNodes[2].innerHTML
     document.getElementById("TheWidth").value = Items.item(SelectedNumber.value-1).childNodes[3].innerHTML
-    document.getElementById("TheNumber").value = Items.item(SelectedNumber.value-1).childNodes[5].innerHTML
-    document.getElementById("ThePrice").value = Items.item(SelectedNumber.value-1).childNodes[6].innerHTML
+    document.getElementById("TheNumber").value = Items.item(SelectedNumber.value-1).childNodes[6].innerHTML
+    document.getElementById("ThePrice").value = Items.item(SelectedNumber.value-1).childNodes[7].innerHTML
     Arrange--
-    Items.item(SelectedNumber.value-1).remove()
+    Items.item((SelectedNumber.value)-1).remove()
   }else{
     SelectedNumber.style.boxShadow = "15px 15px 15px red"
   }
@@ -164,4 +182,52 @@ AllRules.forEach((e)=>{
       document.getElementById(`R${num}`).remove()
     }
   })
+})
+
+window.addEventListener("beforeunload",()=>{
+   event.preventDefault()
+   event.returnValue = ""
+   return ""
+})
+
+// inputs Validation
+let Inputs = Array.from(document.getElementsByTagName("input"))
+
+Inputs.forEach((e)=>{
+  let value = e.getAttribute("data-type")
+  if(value){
+      if(value === "Float"){
+
+        e.addEventListener("blur",()=>{
+          let val = e.value
+          if(isFloat(val)){
+            e.style.borderBottom = "5px solid green"
+          }else{
+            e.style.borderBottom = "5px solid red"
+          }
+        })
+      }else if (value === "Integer"){
+
+        e.addEventListener("blur",()=>{
+          let val = e.value
+          if(isInteger(val)){
+            e.style.borderBottom = "5px solid green"
+          }else{
+            e.style.borderBottom = "5px solid red"
+          }
+        })
+
+      }else if (value === "Text"){
+        
+        e.addEventListener("blur",()=>{
+          let val = e.value
+          if(isText(val)){
+            e.style.borderBottom = "5px solid green"
+          }else{
+            e.style.borderBottom = "5px solid red"
+          }
+        })
+
+      }
+  }
 })
